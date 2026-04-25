@@ -27,6 +27,11 @@ h1 {
   background:#222;
   padding:10px;
   border-radius:10px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.02);
 }
 
 .card img {
@@ -44,6 +49,10 @@ button {
   color:white;
   font-weight:bold;
   cursor:pointer;
+}
+
+button:hover {
+  opacity:0.9;
 }
 
 #pedido {
@@ -70,8 +79,8 @@ button {
 const WHATSAPP = "59898709156";
 
 const items = [
-{id:1,nombre:"Aperol Coconut Margarita",descripcion:"Equilibrio entre acidez y dulzor, con final sedoso.",foto:"https://images.unsplash.com/photo-1500217052183-bc01eee1a74e"},
-{id:2,nombre:"Aperolada",descripcion:"Intensa y sedosa, con coco y notas dulces.",foto:"https://images.unsplash.com/photo-1512103865222-dcf9531c9961"},
+{id:1,nombre:"Aperol Coconut Margarita",descripcion:"Equilibrio entre acidez y dulzor.",foto:"https://images.unsplash.com/photo-1500217052183-bc01eee1a74e"},
+{id:2,nombre:"Aperolada",descripcion:"Intensa y sedosa.",foto:"https://images.unsplash.com/photo-1512103865222-dcf9531c9961"},
 {id:3,nombre:"Pomelo Grove",descripcion:"Refrescante y herbal.",foto:"https://images.pexels.com/photos/605408/pexels-photo-605408.jpeg"},
 {id:4,nombre:"Whisky Tropical",descripcion:"Suave y equilibrado.",foto:"https://images.unsplash.com/photo-1500217052183-bc01eee1a74e"},
 {id:5,nombre:"Blueberry Gin Tonic",descripcion:"Fresco y cítrico.",foto:"https://cdn.pixabay.com/photo/2023/10/11/10/45/cocktail-8308286_1280.jpg"},
@@ -84,13 +93,16 @@ let pedido = [];
 // Render productos
 function renderProductos(){
   const cont = document.getElementById("productos");
+  if(!cont) return;
+
+  cont.innerHTML = ""; // evita duplicados
 
   items.forEach(item => {
     const div = document.createElement("div");
     div.className = "card";
 
     div.innerHTML = `
-      <img src="${item.foto}">
+      <img src="${item.foto}" loading="lazy">
       <h3>${item.nombre}</h3>
       <p>${item.descripcion}</p>
       <button onclick="agregarAlPedido(${item.id})">Agregar</button>
@@ -103,6 +115,8 @@ function renderProductos(){
 // Agregar producto
 function agregarAlPedido(id){
   const item = items.find(i => i.id === id);
+  if(!item) return;
+
   const existente = pedido.find(p => p.id === id);
 
   if(existente){
@@ -117,6 +131,8 @@ function agregarAlPedido(id){
 // Render pedido
 function renderPedido(){
   const cont = document.getElementById("pedido");
+  if(!cont) return;
+
   cont.innerHTML = "";
 
   pedido.forEach(p => {
@@ -126,25 +142,26 @@ function renderPedido(){
   });
 }
 
-// Enviar WhatsApp
+// WhatsApp
 function enviarWhatsApp(){
   if(pedido.length === 0){
     alert("Tu pedido está vacío");
     return;
   }
 
-  let mensaje = "Hola! Quiero pedir:\n";
+  let mensaje = "Hola! Quiero pedir:%0A";
 
   pedido.forEach(p => {
-    mensaje += `- ${p.nombre} x${p.cantidad}\n`;
+    mensaje += `- ${p.nombre} x${p.cantidad}%0A`;
   });
 
-  const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
-  window.open(url, "_blank");
+  window.open(`https://wa.me/${WHATSAPP}?text=${mensaje}`, "_blank");
 }
 
-// Iniciar
-renderProductos();
+// INICIO SEGURO
+document.addEventListener("DOMContentLoaded", () => {
+  renderProductos();
+});
 </script>
 
 </body>
