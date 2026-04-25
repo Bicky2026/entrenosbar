@@ -35,13 +35,13 @@ h1{text-align:center; padding:16px;}
 <script>
 const WHATSAPP = "59898709156";
 const items = [
-{id:1,nombre:"Aperol Coconut Margarita",precio:300,descripcion:"Refrescante, cítrica y cremosa con coco.",ing:["Tequila","Aperol","Leche de coco","Jugo de Lima", "Orgeat"],foto:"https://images.unsplash.com/photo-1500217052183-bc01eee1a74e"},
-{id:2,nombre:"Aperolada",precio:500,descripcion:"Dulce, sedosa y frutal.",ing:["Aperol","Orgeat","Leche de coco","Ananá"],foto:"https://images.unsplash.com/photo-1512103865222-dcf9531c9961"},
-{id:3,nombre:"Pomelo Grove",precio:100,descripcion:"Cítrico y herbal.",ing:["Gin","Syrup romero","Cerveza pomelo"],foto:"https://images.pexels.com/photos/605408/pexels-photo-605408.jpeg"},
-{id:4,nombre:"Whisky Tropical",precio:310,descripcion:"Intenso y frutal.",ing:["Whisky","Jugo de Limón","Jugo de Piña","Syrup Simple"],foto:"https://images.unsplash.com/photo-1500217052183-bc01eee1a74e"},
-{id:5,nombre:"Blueberry Gin Tonic",precio:130,descripcion:"Aromático, fresco y dulce.",ing:["Gin","Syrup arándanos","Tónica"],foto:"https://cdn.pixabay.com/photo/2023/10/11/10/45/cocktail-8308286_1280.jpg"},
-{id:6,nombre:"Painkiller",precio:280,descripcion:"Cremoso y tropical.",ing:["Ron añejo","Syrup de Coco","Jugo de Piña", "Jugo de Naranja"],foto:"https://images.pexels.com/photos/452737/pexels-photo-452737.jpeg"},
-{id:7,nombre:"Rum Barrel",precio:240,descripcion:"Frutal y cítrico.",ing:["Ron añejo","Jugo de Lima","Jugo de Naranja", "Syrup de Maracuyá"],foto:"https://images.unsplash.com/photo-1512103865222-dcf9531c9961"}
+{id:1,nombre:"Aperol Coconut Margarita",precio:300,descripcion:"Equilibrio entre acidez y dulzor, con final sedoso, ALERGENOS: frutos segos.",ing:["Tequila","Aperol","Leche de coco","Jugo de Lima", "Orgeat"],foto:"https://images.unsplash.com/photo-1500217052183-bc01eee1a74e"},
+{id:2,nombre:"Aperolada",descripcion:"Intensa y sedosa, con Coco y notas dulces envolventes.",ing:["Aperol","Orgeat","Leche de coco","Ananá"],foto:"https://images.unsplash.com/photo-1512103865222-dcf9531c9961"},
+{id:3,nombre:"Pomelo Grove",descripcion:"Refrescante y herbal, con Pomelo y aroma ahumado.",ing:["Gin","Syrup romero","Cerveza pomelo"],foto:"https://images.pexels.com/photos/605408/pexels-photo-605408.jpeg"},
+{id:4,nombre:"Whisky Tropical",descricion:"Suave y equilibrado, con Cítricos y un toque dulce.",ing:["Whisky","Jugo de Limón","Jugo de Piña","Syrup Simple"],foto:"https://images.unsplash.com/photo-1500217052183-bc01eee1a74e"},
+{id:5,nombre:"Blueberry Gin Tonic",descripcion:"Fresco y Cítrico, con Arándanos y burbujas suaves.",ing:["Gin","Syrup arándanos","Tónica"],foto:"https://cdn.pixabay.com/photo/2023/10/11/10/45/cocktail-8308286_1280.jpg"},
+{id:6,nombre:"Painkiller",descripcion:"Cremoso y suave, con Coco y jugos frutales intensos.",ing:["Ron añejo","Syrup de Coco","Jugo de Piña", "Jugo de Naranja"],foto:"https://images.pexels.com/photos/452737/pexels-photo-452737.jpeg"},
+{id:7,nombre:"Rum Barrel",descripcion:"Citricoi y vibrante, con Maracuyá y cuerpo profundo.",ing:["Ron añejo","Jugo de Lima","Jugo de Naranja", "Syrup de Maracuyá"],foto:"https://images.unsplash.com/photo-1512103865222-dcf9531c9961"}
 ];
 let pedido = [];
 function getRating(id){return Number(localStorage.getItem("rating_"+id) || 0);} 
