@@ -1,28 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Entre Nos - Pedidos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial;
+  margin: 20px;
+  background:#111;
+  color:#fff;
+}
+
+h1 {
+  text-align:center;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap:15px;
+}
+
+.card {
+  background:#222;
+  padding:10px;
+  border-radius:10px;
+}
+
+.card img {
+  width:100%;
+  border-radius:10px;
+}
+
+button {
+  margin-top:10px;
+  padding:10px;
+  width:100%;
+  border:none;
+  border-radius:8px;
+  background:#25D366;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+#pedido {
+  margin-top:20px;
+  background:#222;
+  padding:10px;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🍹 ENTRE NOS — HACÉ TU PEDIDO</h1>
+
+<div class="grid" id="productos"></div>
+
+<h2>🧾 Tu pedido</h2>
+<div id="pedido"></div>
+
+<button onclick="enviarWhatsApp()">Enviar por WhatsApp</button>
+
+<script>
 const WHATSAPP = "59898709156";
 
 const items = [
-{id:1,nombre:"Aperol Coconut Margarita",descripcion:"Equilibrio entre acidez y dulzor, con final sedoso. ALERGENOS: frutos secos.",ing:["Tequila","Aperol","Leche de coco","Jugo de Lima","Orgeat"],foto:"https://images.unsplash.com/photo-1500217052183-bc01eee1a74e"},
-
-{id:2,nombre:"Aperolada",descripcion:"Intensa y sedosa, con coco y notas dulces envolventes.",ing:["Aperol","Orgeat","Leche de coco","Ananá"],foto:"https://images.unsplash.com/photo-1512103865222-dcf9531c9961"},
-
-{id:3,nombre:"Pomelo Grove",descripcion:"Refrescante y herbal, con pomelo y aroma ahumado.",ing:["Gin","Syrup romero","Cerveza pomelo"],foto:"https://images.pexels.com/photos/605408/pexels-photo-605408.jpeg"},
-
-{id:4,nombre:"Whisky Tropical",descripcion:"Suave y equilibrado, con cítricos y un toque dulce.",ing:["Whisky","Jugo de Limón","Jugo de Piña","Syrup Simple"],foto:"https://images.unsplash.com/photo-1500217052183-bc01eee1a74e"},
-
-{id:5,nombre:"Blueberry Gin Tonic",descripcion:"Fresco y cítrico, con arándanos y burbujas suaves.",ing:["Gin","Syrup arándanos","Tónica"],foto:"https://cdn.pixabay.com/photo/2023/10/11/10/45/cocktail-8308286_1280.jpg"},
-
-{id:6,nombre:"Painkiller",descripcion:"Cremoso y suave, con coco y jugos frutales intensos.",ing:["Ron añejo","Syrup de Coco","Jugo de Piña","Jugo de Naranja"],foto:"https://images.pexels.com/photos/452737/pexels-photo-452737.jpeg"},
-
-{id:7,nombre:"Rum Barrel",descripcion:"Cítrico y vibrante, con maracuyá y cuerpo profundo.",ing:["Ron añejo","Jugo de Lima","Jugo de Naranja","Syrup de Maracuyá"],foto:"https://images.unsplash.com/photo-1512103865222-dcf9531c9961"}
+{id:1,nombre:"Aperol Coconut Margarita",descripcion:"Equilibrio entre acidez y dulzor, con final sedoso.",foto:"https://images.unsplash.com/photo-1500217052183-bc01eee1a74e"},
+{id:2,nombre:"Aperolada",descripcion:"Intensa y sedosa, con coco y notas dulces.",foto:"https://images.unsplash.com/photo-1512103865222-dcf9531c9961"},
+{id:3,nombre:"Pomelo Grove",descripcion:"Refrescante y herbal.",foto:"https://images.pexels.com/photos/605408/pexels-photo-605408.jpeg"},
+{id:4,nombre:"Whisky Tropical",descripcion:"Suave y equilibrado.",foto:"https://images.unsplash.com/photo-1500217052183-bc01eee1a74e"},
+{id:5,nombre:"Blueberry Gin Tonic",descripcion:"Fresco y cítrico.",foto:"https://cdn.pixabay.com/photo/2023/10/11/10/45/cocktail-8308286_1280.jpg"},
+{id:6,nombre:"Painkiller",descripcion:"Cremoso y tropical.",foto:"https://images.pexels.com/photos/452737/pexels-photo-452737.jpeg"},
+{id:7,nombre:"Rum Barrel",descripcion:"Cítrico y vibrante.",foto:"https://images.unsplash.com/photo-1512103865222-dcf9531c9961"}
 ];
 
 let pedido = [];
 
+// Render productos
+function renderProductos(){
+  const cont = document.getElementById("productos");
+
+  items.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <img src="${item.foto}">
+      <h3>${item.nombre}</h3>
+      <p>${item.descripcion}</p>
+      <button onclick="agregarAlPedido(${item.id})">Agregar</button>
+    `;
+
+    cont.appendChild(div);
+  });
+}
+
 // Agregar producto
 function agregarAlPedido(id){
   const item = items.find(i => i.id === id);
-  if(!item) return;
-
   const existente = pedido.find(p => p.id === id);
 
   if(existente){
@@ -34,11 +114,9 @@ function agregarAlPedido(id){
   renderPedido();
 }
 
-// Renderizar pedido
+// Render pedido
 function renderPedido(){
   const cont = document.getElementById("pedido");
-  if(!cont) return;
-
   cont.innerHTML = "";
 
   pedido.forEach(p => {
@@ -48,7 +126,7 @@ function renderPedido(){
   });
 }
 
-// Enviar a WhatsApp
+// Enviar WhatsApp
 function enviarWhatsApp(){
   if(pedido.length === 0){
     alert("Tu pedido está vacío");
@@ -64,3 +142,10 @@ function enviarWhatsApp(){
   const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");
 }
+
+// Iniciar
+renderProductos();
+</script>
+
+</body>
+</html>
