@@ -51,10 +51,6 @@ button {
   cursor:pointer;
 }
 
-button:hover {
-  opacity:0.9;
-}
-
 #pedido {
   margin-top:20px;
   background:#222;
@@ -88,49 +84,49 @@ const items = [
 {
 id:1,
 nombre:"Aperol Coconut Margarita",
-descripcion:"Equilibrio entre acidez y dulzor." 
-ing:["Tequila","Aperol","Leche de coco","Jugo de Lima",],
+descripcion:"Equilibrio entre acidez y dulzor.",
+ing:["Tequila","Aperol","Leche de coco","Jugo de Lima"],
 foto:"AperolCoconutMargarita.jpeg"
 },
 {
 id:2,
 nombre:"Aperolada",
-descripcion:"Intensa y sedosa, con Coco y notas dulces envolventes, ALERGENOS: frutos secos .",
+descripcion:"Intensa y sedosa, con coco y notas dulces.",
 ing:["Aperol","Orgeat","Leche de coco","Ananá"],
 foto:"Aperolada.jpeg"
 },
 {
 id:3,
 nombre:"Pomelo Grove",
-descripcion:"Refrescante y herbal, con Pomelo y aroma ahumado.",
+descripcion:"Refrescante y herbal.",
 ing:["Gin","Syrup de Romero","Cerveza pomelo"],
 foto:"PomeloGrove.jpeg"
 },
 {
 id:4,
 nombre:"Whisky Tropical",
-descripcion:"Suave y equilibrado, con cítricos y un toque dulce.",
+descripcion:"Suave y equilibrado.",
 ing:["Whisky","Jugo de Limón","Jugo de Piña","Syrup Simple"],
 foto:"Whiskytropical.jpeg"
 },
 {
 id:5,
 nombre:"Blueberry Gin Tonic",
-descripcion:"Fresco y cítrico, con Arándanos y burbujas suaves.",
+descripcion:"Fresco y cítrico.",
 ing:["Gin","Syrup de Arándanos","Tónica"],
-foto:"giBlueberryGinTonicn.jpeg"
+foto:"BlueberryGinTonic.jpeg"
 },
 {
 id:6,
 nombre:"Painkiller",
-descripcion:"Cremoso y suave, con Coco y jugos frutales intensos.",
+descripcion:"Cremoso y tropical.",
 ing:["Ron añejo","Syrup de Coco","Piña","Naranja"],
 foto:"Painkiller.jpeg"
 },
 {
 id:7,
 nombre:"Rum Barrel",
-descripcion:"Cítrico y vibrante, con Maracuyá y cuerpo profundo.",
+descripcion:"Cítrico y vibrante.",
 ing:["Ron","Lima","Naranja","Syrup de Maracuyá"],
 foto:"RumBarrel.jpeg"
 }
@@ -141,8 +137,6 @@ let pedido = [];
 // Render productos
 function renderProductos(){
   const cont = document.getElementById("productos");
-  if(!cont) return;
-
   cont.innerHTML = "";
 
   items.forEach(item => {
@@ -180,8 +174,6 @@ function agregarAlPedido(id){
 // Render pedido
 function renderPedido(){
   const cont = document.getElementById("pedido");
-  if(!cont) return;
-
   cont.innerHTML = "";
 
   pedido.forEach(p => {
@@ -191,30 +183,26 @@ function renderPedido(){
   });
 }
 
-// WhatsApp
+// Enviar WhatsApp
 function enviarWhatsApp(){
   if(pedido.length === 0){
     alert("Tu pedido está vacío");
     return;
   }
 
-  let mensaje = "Hola! Quiero pedir:%0A";
+  let mensaje = "Hola! Quiero pedir:\n";
 
   pedido.forEach(p => {
-    mensaje += `- ${p.nombre} x${p.cantidad}%0A`;
+    mensaje += `- ${p.nombre} x${p.cantidad}\n`;
   });
 
-  window.open(`https://wa.me/${WHATSAPP}?text=${mensaje}`, "_blank");
+  const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, "_blank");
 }
 
 // Inicio seguro
 document.addEventListener("DOMContentLoaded", () => {
   renderProductos();
-});
-</script>
-
-</body>
-</html>
 });
 </script>
 
