@@ -61,6 +61,12 @@ button:hover {
   padding:10px;
   border-radius:10px;
 }
+
+small {
+  display:block;
+  margin-top:5px;
+  opacity:0.7;
+}
 </style>
 </head>
 
@@ -79,13 +85,55 @@ button:hover {
 const WHATSAPP = "59898709156";
 
 const items = [
-{id:1,nombre:"Aperol Coconut Margarita",descripcion:"Equilibrio entre acidez y dulzor, con final cremoso.",foto:"AperolCoconutMargarita.jpeg"},
-{id:2,nombre:"Aperolada",descripcion:"Intensa y sedosa, con Coco y notas dulces envolventes.",foto:"Aperolada.jpeg"},
-{id:3,nombre:"Pomelo Grove",descripcion:"Refrescante y herbal, con Pomelo y aroma ahumado.",foto:"PomeloGrove.jpeg"},
-{id:4,nombre:"Whisky Tropical",descripcion:"Suave y equilibrado, con cítricos y un toque dulce.",foto:"Whiskytropical.jpeg"},
-{id:5,nombre:"Blueberry Gin Tonic",descripcion:"Fresco y cítrico, con Arándanos y burbujas suaves.",foto:"BlueberryGinTonic.jpeg"},
-{id:6,nombre:"Painkiller",descripcion:"Cremoso y tropical, con Coco y jugos frutales intensos.",foto:"Painkiller.jpeg"},
-{id:7,nombre:"Rum Barrel",descripcion:"Cítrico y vibrante, con Maracuyá y cuerpo profundo.",foto:"RumBarrel.jpeg"}
+{
+id:1,
+nombre:"Aperol Coconut Margarita",
+descripcion:"Equilibrio entre acidez y dulzor.",
+ing:["Tequila","Aperol","Leche de coco","Jugo de Lima","Orgeat"],
+foto:"aperol.jpg"
+},
+{
+id:2,
+nombre:"Aperolada",
+descripcion:"Intensa y sedosa.",
+ing:["Aperol","Orgeat","Leche de coco","Ananá"],
+foto:"aperolada.jpg"
+},
+{
+id:3,
+nombre:"Pomelo Grove",
+descripcion:"Refrescante y herbal.",
+ing:["Gin","Syrup romero","Cerveza pomelo"],
+foto:"pomelo.jpg"
+},
+{
+id:4,
+nombre:"Whisky Tropical",
+descripcion:"Suave y equilibrado.",
+ing:["Whisky","Jugo de Limón","Jugo de Piña","Syrup Simple"],
+foto:"whisky.jpg"
+},
+{
+id:5,
+nombre:"Blueberry Gin Tonic",
+descripcion:"Fresco y cítrico.",
+ing:["Gin","Syrup arándanos","Tónica"],
+foto:"gin.jpg"
+},
+{
+id:6,
+nombre:"Painkiller",
+descripcion:"Cremoso y tropical.",
+ing:["Ron añejo","Coco","Piña","Naranja"],
+foto:"painkiller.jpg"
+},
+{
+id:7,
+nombre:"Rum Barrel",
+descripcion:"Cítrico y vibrante.",
+ing:["Ron","Lima","Naranja","Maracuyá"],
+foto:"rum.jpg"
+}
 ];
 
 let pedido = [];
@@ -95,7 +143,7 @@ function renderProductos(){
   const cont = document.getElementById("productos");
   if(!cont) return;
 
-  cont.innerHTML = ""; // evita duplicados
+  cont.innerHTML = "";
 
   items.forEach(item => {
     const div = document.createElement("div");
@@ -105,6 +153,7 @@ function renderProductos(){
       <img src="${item.foto}" loading="lazy">
       <h3>${item.nombre}</h3>
       <p>${item.descripcion}</p>
+      <small>${item.ing.join(" • ")}</small>
       <button onclick="agregarAlPedido(${item.id})">Agregar</button>
     `;
 
@@ -158,9 +207,14 @@ function enviarWhatsApp(){
   window.open(`https://wa.me/${WHATSAPP}?text=${mensaje}`, "_blank");
 }
 
-// INICIO SEGURO
+// Inicio seguro
 document.addEventListener("DOMContentLoaded", () => {
   renderProductos();
+});
+</script>
+
+</body>
+</html>
 });
 </script>
 
