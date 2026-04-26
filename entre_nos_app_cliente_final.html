@@ -58,6 +58,14 @@ button {
   border-radius:10px;
 }
 
+input {
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  margin-top:15px;
+}
+
 small {
   display:block;
   margin-top:5px;
@@ -75,6 +83,8 @@ small {
 <h2>🧾 Tu pedido</h2>
 <div id="pedido"></div>
 
+<input id="cliente" placeholder="Tu nombre">
+
 <button onclick="enviarWhatsApp()">Enviar por WhatsApp</button>
 
 <script>
@@ -91,7 +101,7 @@ foto:"AperolCoconutMargarita.jpeg"
 {
 id:2,
 nombre:"Aperolada",
-descripcion:"Intensa y sedosa, con coco y notas dulces, ALERGERNOS: frutos secos.",
+descripcion:"Intensa y sedosa, con coco y notas dulces.",
 ing:["Aperol","Orgeat","Leche de coco","Ananá"],
 foto:"Aperolada.jpeg"
 },
@@ -190,7 +200,14 @@ function enviarWhatsApp(){
     return;
   }
 
-  let mensaje = "Hola! Quiero pedir:\n";
+  const cliente = document.getElementById("cliente").value.trim();
+
+  if(cliente === ""){
+    alert("Por favor ingresá tu nombre");
+    return;
+  }
+
+  let mensaje = `Hola! Soy ${cliente} y quiero pedir:\n`;
 
   pedido.forEach(p => {
     mensaje += `- ${p.nombre} x${p.cantidad}\n`;
